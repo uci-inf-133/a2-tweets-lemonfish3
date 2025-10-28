@@ -9,16 +9,17 @@ class Tweet {
 
 	//returns either 'live_event', 'achievement', 'completed_event', or 'miscellaneous'
     get source():string {
-        if (this.text.startsWith("Just completed")) {
+        var text = this.text;
+        if (text.startsWith("Just completed")) {
             return "completed_event";
         }
-        else if (this.text.startsWith("Watch my run")) {
+        else if (text.startsWith("Watch my run")) {
             return "live_event";
         }
-        else if (this.text.startsWith("Achieved")) {
+        else if (text.startsWith("Achieved")) {
             return "achievement";
         }
-        else if (this.text.startsWith("Just posted")) {
+        else if (text.startsWith("Just posted")) {
             return "miscellaneous";
         }
         else {
@@ -29,7 +30,7 @@ class Tweet {
     //returns a boolean, whether the text includes any content written by the person tweeting.
     get written():boolean {
         //TODO: identify whether the tweet is written
-        return false;
+        return this.text.includes('-');
     }
 
     get writtenText():string {
