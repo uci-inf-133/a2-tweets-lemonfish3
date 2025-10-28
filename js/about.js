@@ -38,9 +38,10 @@ function parseTweets(runkeeper_tweets) {
 	document.getElementsByClassName('miscellaneous')[0].innerText = miscellaneous_count;
 	document.getElementsByClassName('miscellaneousPct')[0].innerText = `${(completed_count / total_count * 100).toFixed(2)}%`;
 
-	for (i = 0; i < 50; ++i) {
-		console.log(tweet_array[i].text);
-	}
+	// for (i = 0; i < 50; ++i) {
+	// 	console.log(tweet_array[i].text);
+	// }
+	console.log(tweet_array[3].writtenText);
 	var written_count = completed.filter(t => t.written == true).length;
 	document.getElementsByClassName('written')[0].innerText = written_count;
 	document.getElementsByClassName('writtenPct')[0].innerText = `${(written_count / completed_count * 100).toFixed(2)}%`

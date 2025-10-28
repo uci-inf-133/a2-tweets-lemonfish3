@@ -38,7 +38,9 @@ class Tweet {
             return "";
         }
         //TODO: parse the written text from the tweet
-        return "";
+        var split_text = this.text.split('-')[1];
+        var written_text = split_text.split('https')[0].trim();
+        return written_text;
     }
 
     get activityType():string {
