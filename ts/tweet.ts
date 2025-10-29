@@ -47,8 +47,14 @@ class Tweet {
         if (this.source != 'completed_event') {
             return "unknown";
         }
-        //TODO: parse the activity type from the text of the tweet
-        return "";
+        if (this.written){
+            var split_activity = this.text.split('-')[0].split(' ');
+            var activity = split_activity[split_activity.length - 2];
+            return activity;
+        }
+        var split_activity = this.text.split('with')[0].split(' ');
+        var activity = split_activity[split_activity.length - 2];
+        return activity;
     }
 
     get distance():number {
@@ -56,7 +62,13 @@ class Tweet {
             return 0;
         }
         //TODO: prase the distance from the text of the tweet
-        return 0;
+        var dist = this.text.split('a ')[1].split(' ');
+        if (dist[1] == 'km'){
+            var distance = (parseFloat(dist[0]) / 1.609).toFixed(2);
+            return Number(distance);
+        }
+        var distance = dist[0];
+        return Number(distance);;
     }
 
     getHTMLTableRow(rowNumber:number):string {
