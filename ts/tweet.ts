@@ -42,14 +42,14 @@ class Tweet {
         var written_text = split_text.split('https')[0].trim();
         return written_text;
     }
-
+    // only applies for completed tweets
     get activityType():string {
-        if (this.source != 'completed_event') {
-            return "unknown";
+        if (this.source != 'completed_event'){
+            return 'unknown';
         }
         if (this.written){
-            var split_activity = this.text.split('-')[0].split(' ');
-            var activity = split_activity[split_activity.length - 2];
+            var split_activity = this.text.split(' -')[0].split(' ');
+            var activity = split_activity[split_activity.length - 1];
             return activity;
         }
         var split_activity = this.text.split('with')[0].split(' ');
@@ -73,6 +73,18 @@ class Tweet {
 
     getHTMLTableRow(rowNumber:number):string {
         //TODO: return a table row which summarizes the tweet with a clickable link to the RunKeeper activity
-        return "<tr></tr>";
+        var split_text = this.text.split(' ');
+        var html = split_text.find(function(w){
+            return w.startsWith('http');
+        });
+        var front = this.text.split('https')[0];
+        var text = `${front}<a href="${html}">${html}</a> #Runkeeper`;
+        // console.log(html);
+        var row = `<tr>
+        <td>${rowNumber}</td>
+        <td>${this.activityType}</td>
+        <td>${text}</td>
+        </tr>`
+        return row ;
     }
 }
